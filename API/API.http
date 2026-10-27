@@ -1,0 +1,61 @@
+@API_HostAddress = https://localhost:5002
+@ProfileId = 4
+
+GET {{API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{API_HostAddress}}/api/Profile
+Accept: application/json
+
+###
+
+GET {{API_HostAddress}}/api/Profile/3
+Accept: application/json
+
+###
+
+# Create a profile. Use an ID that is not already in the in-memory list.
+POST {{API_HostAddress}}/api/Profile
+Content-Type: application/json
+Accept: application/json
+
+{
+	"id": {{ProfileId}},
+	"name": "Jordan Lee",
+	"birthDate": "2001-06-15T00:00:00",
+	"email": "jordan.lee@example.com"
+}
+
+###
+
+# Read the profile created above.
+GET {{API_HostAddress}}/api/Profile/{{ProfileId}}
+Accept: application/json
+
+###
+
+# Replace the profile's editable values.
+PUT {{API_HostAddress}}/api/Profile/{{ProfileId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+	"name": "Jordan Lee Updated",
+	"birthDate": "2001-06-15T00:00:00",
+	"email": "jordan.lee@example.com"
+}
+
+###
+
+# Remove the profile.
+DELETE {{API_HostAddress}}/api/Profile/{{ProfileId}}
+
+###
+
+# This should return 404 after the DELETE request succeeds.
+GET {{API_HostAddress}}/api/Profile/{{ProfileId}}
+Accept: application/json
+
+###
